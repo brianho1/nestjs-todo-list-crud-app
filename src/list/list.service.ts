@@ -7,6 +7,12 @@ import { UserDto} from '../user/dto/user.dto'
 import { UserService } from '../user/user.service'
 import { toListDto } from '../common/mapper';
 import { CreateListDto} from './dto/list.create.dto';
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
+import { AllListDto } from './dto/all.list.dto';
 
 @Injectable()
 export class ListService {
@@ -15,6 +21,14 @@ export class ListService {
     private readonly listRepo: Repository<List>,
     private readonly userService: UserService,
   ) {}
+
+  async paginate(options: IPaginationOptions): Promise<Pagination<List>> {
+
+    const queryBuilder = this.listRepo.createQueryBuilder('c');
+    queryBuilder.orderBy('c.name', 'DESC'); 
+
+    return paginate<List>(this.listRepo, options);
+  }
 
   async getAllLists(): Promise<ListDto[]> {
     const lists = await this.listRepo.find({ relations: ['owner'] });

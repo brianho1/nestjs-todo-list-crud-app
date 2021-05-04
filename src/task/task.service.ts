@@ -6,6 +6,7 @@ import { toTaskDto } from '../common/mapper';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { List } from '../list/list.entity';
+  
 
 @Injectable()
 export class TaskService {
@@ -15,6 +16,8 @@ export class TaskService {
     @InjectRepository(List)
     private readonly todoRepo: Repository<List>,
   ) {}
+
+
 
   async getTask(id: number): Promise<TaskDto> {
     const task: Task = await this.taskRepo.findOne({ where: { id } });
