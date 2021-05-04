@@ -9,8 +9,9 @@ import { ListModule } from './list/list.module';
 import { TaskModule } from './task/task.module';
 import { List } from './list/list.entity';
 import { Task } from './task/task.entity';
-require('dotenv').config()
+import { config } from 'dotenv'
 
+config();
 const entities = [User, List, Task];
 @Module({
   imports: [TypeOrmModule.forRoot({

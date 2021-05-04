@@ -8,7 +8,9 @@ import {
     UpdateDateColumn,
   } from 'typeorm';
   import * as bcrypt from 'bcryptjs';
-  
+
+  //move this to a constant variable file
+  const SALT_ROUNDS = 8;
   @Entity()
   export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -17,20 +19,20 @@ import {
     @Column({ unique: true })
     email: string;
   
-    @Column()
+    @Column({name: 'hashed_password'})
     password: string;
   
-    @Column()
-    @CreateDateColumn()
+    @CreateDateColumn({name: 'created_at'})
     createdAt: Date;
   
-    @Column()
-    @UpdateDateColumn()
+    @UpdateDateColumn({name: 'updated_at'})
     updatedAt: Date;
-  
+    
+
+    // renamed to password_hased
     @BeforeInsert()
     async hashPassword() {
-      this.password = await bcrypt.hash(this.password, 8);
+      this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     }
   
     async validatePassword(password: string): Promise<boolean> {

@@ -30,7 +30,7 @@ export class TaskController {
     const tasks = await this.taskService.getTasksByList(id);
     return { tasks };
   }
-
+  
   @Post('list/:id')
   async create(
     @Param('id') id: number,

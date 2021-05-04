@@ -15,7 +15,7 @@ import { AuthController } from './auth.controller';
 // we’ll use to secure our routes.
 
 // console.log(process.env.JWT_SECRET);
-require('dotenv').config()
+// require('dotenv').config()
 
 @Module({
   imports: [

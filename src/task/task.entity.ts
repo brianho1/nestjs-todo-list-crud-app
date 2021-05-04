@@ -19,10 +19,10 @@ import {
     @Column({ nullable: true })
     priority?: number;  
 
-    @CreateDateColumn() 
+    @CreateDateColumn({name: 'created_at'}) 
     createdAt?: Date;
 
-    @CreateDateColumn() 
+    @CreateDateColumn({name: 'updated_at'}) 
     updatedAt?: Date;
   
     @ManyToOne(type => List, list => list.tasks)

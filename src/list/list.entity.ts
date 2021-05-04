@@ -26,12 +26,10 @@ import {
     @ManyToOne(type => User)
     owner?: User;
 
-    @Column()
-    @CreateDateColumn()
+    @CreateDateColumn({name: 'created_at'})
     createdAt?: Date;
   
-    @Column()
-    @UpdateDateColumn()
+    @UpdateDateColumn({name: 'updated_at'})
     updatedAt?: Date;
 
     @OneToMany(type => Task, task => task.list)

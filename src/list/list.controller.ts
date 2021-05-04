@@ -11,7 +11,6 @@ import {
   UseGuards,
 } from "@nestjs/common";
 
-import { List } from "./list.entity";
 import { ListService } from "./list.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ListDto } from "./dto/list.dto";
