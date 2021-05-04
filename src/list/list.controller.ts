@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  InternalServerErrorException,
+  Query,
   Post,
   Body,
   Put,
@@ -9,14 +9,16 @@ import {
   Param,
   Req,
   UseGuards,
+  ParseIntPipe
 } from "@nestjs/common";
-
+import { Pagination } from 'nestjs-typeorm-paginate';
 import { ListService } from "./list.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ListDto } from "./dto/list.dto";
 import { AllListDto } from "./dto/all.list.dto";
 import { CreateListDto } from "./dto/list.create.dto";
 import { UserDto } from "src/user/dto/user.dto";
+import { List } from "./list.entity";
 
 @UseGuards(JwtAuthGuard)
 @Controller("lists")
@@ -29,6 +31,20 @@ export class ListController {
     const lists = await this.listService.getAllLists();
     return { lists };
   }
+
+  @Get('paginate')
+  async index(
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('limit', ParseIntPipe) limit: number = 100,
+  ): Promise<Pagination<List>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.listService.paginate({
+      page,
+      limit,
+      // route: 'http://localhost:3000.com/lists',
+    });
+  }
+
 
 
   @Get(':id')
