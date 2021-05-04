@@ -39,7 +39,7 @@ export class TaskService {
   }
 
   async createTask(listId: number, taskDto: CreateTaskDto): Promise<TaskDto> {
-    const { name, priority } = taskDto;
+    const { name, note, priority } = taskDto;
 
     const list: List = await this.todoRepo.findOne({
       where: { id: listId },
@@ -48,6 +48,7 @@ export class TaskService {
 
     const task: Task = await this.taskRepo.create({
       name,
+      note,
       priority,
       list,
     });

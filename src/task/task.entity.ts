@@ -16,6 +16,9 @@ import {
     @Column({ type: 'varchar', nullable: false }) 
     name: string;
 
+    @Column({ type: 'text', nullable: true }) 
+    note?: string;
+
     @Column({ nullable: true })
     priority?: number;  
 

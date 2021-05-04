@@ -19,11 +19,13 @@ export const toListDto = (data: List): ListDto => {
   };
 
   export const toTaskDto = (data: Task): TaskDto => {
-    const { id, name } = data;
+    const { id, name, note, priority } = data;
   
     let taskDto: TaskDto = {
       id,
       name,
+      note,
+      priority
     };
   
     return taskDto;

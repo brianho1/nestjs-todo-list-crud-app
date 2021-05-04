@@ -5,6 +5,9 @@ export class CreateTaskDto {
   name: string;
 
   @IsOptional()
+  note?: string;
+
+  @IsOptional()
   @Max(2)
   @Min(0)
   priority?: number;
